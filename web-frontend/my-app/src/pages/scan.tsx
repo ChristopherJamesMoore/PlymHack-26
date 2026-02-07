@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-=======
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
->>>>>>> 1cd2d25ef48923e721e3792e5d4eb1cf7562d9c4
+import { useNavigate } from "react-router-dom";
 import { HeaderNav } from "../components/header-nav";
 import { CameraContainer } from "../components/camera-container";
 import { CameraControls } from "../components/camera-controls";
@@ -34,7 +30,6 @@ export function ScanPage() {
     start();
 
     return () => {
-      if (isCameraOn) return;
       streamRef.current?.getTracks().forEach((t) => t.stop());
       streamRef.current = null;
       if (videoRef.current) videoRef.current.srcObject = null;
@@ -113,26 +108,11 @@ export function ScanPage() {
       Help: () => {
         console.log('Help clicked');
       },
-<<<<<<< HEAD
       startCamera: async () => {
         setIsCameraOn(true);
       },
       stopCamera: () => {
         setIsCameraOn(false);
-      },
-    };
-  }, [navigate]);
-=======
-      startCamera: async () => {
-        setIsCameraOn(true);
-      },
-      stopCamera: () => {
-        setIsCameraOn(false);
-      },
-    };
-  }, []);
->>>>>>> 1cd2d25ef48923e721e3792e5d4eb1cf7562d9c4
-sCameraOn(false);
       },
     };
   }, [navigate]);
