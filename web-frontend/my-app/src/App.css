@@ -38,7 +38,7 @@
 }
 
 body {
-  background-color: #fdfbd4;
+  background-image: url('../public/images/Background.png');
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -97,4 +97,26 @@ button {
 
 #captureBtnStop {
   border-radius: 25px;
+}
+
+#captureBtnStop:hover {
+  background-color: #2e6f40 !important;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#logo {
+  max-width: 300px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.branding {
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 70px;
+  width: 70px;
 }

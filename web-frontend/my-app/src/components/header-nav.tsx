@@ -9,6 +9,7 @@ export type HeaderNavProps = {
 export function HeaderNav({ onHomeClick, onCameraClick, onHelpClick }: HeaderNavProps) {
   return (
     <div className="navbar">
+      <img className="branding" src="/images/LogoNOWRITING.png"/>
       <button id="home" type="button" onClick={onHomeClick}>
         Home
       </button>
@@ -18,6 +19,7 @@ export function HeaderNav({ onHomeClick, onCameraClick, onHelpClick }: HeaderNav
       <button id="help" type="button" onClick={onHelpClick}>
         Help
       </button>
+      <img className="branding" src="/images/LogoNOWRITING.png"/>
     </div>
   );
 }

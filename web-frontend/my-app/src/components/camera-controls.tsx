@@ -18,11 +18,10 @@ export function CameraControls({
   stopDisabled,
 }: CameraControlsProps) {
   return (
-    <div className="controls d-flex gap-2 align-items-center">
+    <div className="controls">
       <button
         id="captureBtn"
         type="button"
-        className="btn btn-primary"
         onClick={onStartCamera}
         disabled={startDisabled}
       >
@@ -32,7 +31,6 @@ export function CameraControls({
       <button
         id="captureBtnStop"
         type="button"
-        className="btn btn-outline-danger"
         onClick={onStopCamera}
         disabled={stopDisabled}
       >

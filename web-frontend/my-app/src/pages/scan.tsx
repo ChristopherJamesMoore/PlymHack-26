@@ -57,6 +57,7 @@ export function ScanPage() {
     <div className="container py-3">
       <HeaderNav onHomeClick={handlers.home} onCameraClick={handlers.camera} />
 
+      <img id="logo" src="/images/LogoWriting.png"></img>
       <div className="my-3">
         <CameraContainer videoRef={videoRef} canvasRef={canvasRef} isVisible={isCameraOn} />
       </div>
