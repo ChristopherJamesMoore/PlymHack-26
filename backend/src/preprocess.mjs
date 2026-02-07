@@ -2,7 +2,7 @@ import sharp from "sharp";
 import ort from "onnxruntime-node";
 
 export async function preprocessToTensor(buffer, size = 640) {
-  const img = sharp(buffer).removeAlpha().toColourspace("rgb");
+  const img = sharp(buffer).removeAlpha();
   const meta = await img.metadata();
 
   const origW = meta.width;

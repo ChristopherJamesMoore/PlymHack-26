@@ -65,8 +65,15 @@ export function ScanPage() {
     const data = await res.json();
     const top = data?.top;
     if (top?.label) {
-      const conf = typeof top.conf === "number" ? `${(top.conf * 100).toFixed(1)}%` : "";
-      setResultsText(`${top.label}${conf ? ` (${conf})` : ""}`);
+      const confValue =
+        typeof top.conf === "number" ? Number(top.conf) : null;
+      if (confValue !== null && confValue < 0.5) {
+        setResultsText("I'm not sure.");
+        return;
+      }
+      const conf =
+        confValue !== null ? ` (${(confValue * 100).toFixed(1)}%)` : "";
+      setResultsText(`${top.label}${conf}`);
     } else {
       setResultsText("No results yet.");
     }

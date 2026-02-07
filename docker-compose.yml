@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5050:5050"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./web-frontend/my-app
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

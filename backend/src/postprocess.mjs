@@ -63,7 +63,13 @@ export function postprocessDetections(outputTensor, meta, opts) {
   }
 
   let N, K, layout;
-  if (dims[1] > dims[2]) {
+  // YOLOv8 ONNX commonly outputs shape [1, (4+classes), num_dets]
+  // e.g. [1,10,8400] for 6 classes. Treat that as KxN.
+  if (dims[1] <= 128 && dims[2] > dims[1]) {
+    layout = "KxN";
+    K = dims[1];
+    N = dims[2];
+  } else if (dims[1] > dims[2]) {
     layout = "KxN";
     K = dims[1];
     N = dims[2];
