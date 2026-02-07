@@ -12,10 +12,18 @@ export function ScanPage() {
 
   const [resultsText, setResultsText] = useState("No results yet.");
   const [centersText, setCentersText] = useState("No centers found yet.");
+  const [locationText, setLocationText] = useState("Location not retrieved yet.");
 
   const [isCameraOn, setIsCameraOn] = useState(false);
   const streamRef = useRef<MediaStream | null>(null);
   const scanTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const savedLocation = localStorage.getItem('userLocation');
+    if (savedLocation) {
+      setLocationText(savedLocation);
+    }
+  }, []);
 
   useEffect(() => {
     const start = async () => {
@@ -121,6 +129,24 @@ export function ScanPage() {
       stopCamera: () => {
         setIsCameraOn(false);
       },
+      getLocation: () => {
+        if (!navigator.geolocation) {
+          setLocationText("Geolocation not supported by this browser.");
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            const locationString = `Latitude: ${latitude.toFixed(4)}, Longitude: ${longitude.toFixed(4)}`;
+            setLocationText(locationString);
+            localStorage.setItem('userLocation', locationString);
+          },
+          (error) => {
+            setLocationText(`Error: ${error.message}`);
+          }
+        );
+      },
     };
   }, [navigate]);
 
@@ -144,8 +170,13 @@ export function ScanPage() {
         stopDisabled={!isCameraOn}
         captureDisabled={!isCameraOn}
       />
-
       <ResultsPanel resultsText={resultsText} recyclingCentersText={centersText} />
+
+        <button id="location-button"
+          onClick={handlers.getLocation}
+        >
+          Get My Location
+        </button>
     </div>
   );
 }
