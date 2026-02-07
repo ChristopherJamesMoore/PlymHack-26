@@ -3,16 +3,20 @@ import React from "react";
 export type HeaderNavProps = {
   onHomeClick?: () => void;
   onCameraClick?: () => void;
+  onHelpClick?: () => void;
 };
 
-export function HeaderNav({ onHomeClick, onCameraClick }: HeaderNavProps) {
+export function HeaderNav({ onHomeClick, onCameraClick, onHelpClick }: HeaderNavProps) {
   return (
-    <div className="header d-flex gap-2 align-items-center">
-      <button id="home" type="button" className="btn btn-outline-secondary" onClick={onHomeClick}>
+    <div className="navbar">
+      <button id="home" type="button" onClick={onHomeClick}>
         Home
       </button>
-      <button id="camera" type="button" className="btn btn-outline-secondary" onClick={onCameraClick}>
+      <button id="camera" type="button" onClick={onCameraClick}>
         Camera
+      </button>
+      <button id="help" type="button" onClick={onHelpClick}>
+        Help
       </button>
     </div>
   );
