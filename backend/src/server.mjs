@@ -8,11 +8,19 @@ import { mapToBin } from "./bins.mjs";
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5050;
 
 const labels = JSON.parse(
   fs.readFileSync(new URL("../model/labels.json", import.meta.url), "utf8")
 );
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+  return next();
+});
 
 app.get("/health", (req, res) => res.json({ ok: true }));
 
