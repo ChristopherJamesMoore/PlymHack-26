@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>BinWise</title>
+</head>
+<body>
+    <h1>BinWise</h1>
+    <div class = "header">
+        <button id="home"> Home </button>
+        <button id="camera"> Camera</button>
+    </div>
+
+    <div class="camera-container">
+        <video id="videoFeed" autoplay playsinline></video>
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="controls">
+        <button id="captureBtn">Start Camera</button>
+        <button id="captureBtnStop">Stop Camera</button>
+        <button id="takePicture">Capture Photo</button>
+    </div>
+
+    <div class="results">
+        <h2>Recognition Results:</h2>
+        <p id="resultsText">No results yet.</p>
+        <h2>The nearest recycling centers:</h2>
+        <p id="recyclingCenters">No centers found yet.</p>
+</body>
+</html>
