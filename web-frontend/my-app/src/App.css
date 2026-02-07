@@ -36,3 +36,87 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-image: url('../public/images/Background.png');
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.navbar {
+  background-color: #80461B;
+  padding: 10px;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 50px;
+  margin-bottom: 20px;
+  border: 5px solid #d6b450;
+}
+
+button {
+  background-color: #80461B;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.camera-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#videoFeed{
+  max-width: 640px;
+  width: 100%;
+  border: 5px solid #d6b450;
+  border-radius: 8px;
+  background-color: #000;
+}
+
+#canvas {
+  margin-top: 10px;
+}
+
+#captureBtn {
+  border-radius: 25px;
+}
+
+#captureBtn:hover {
+  background-color: #2e6f40 !important;
+}
+
+#captureBtnStop {
+  border-radius: 25px;
+}
+
+#captureBtnStop:hover {
+  background-color: #2e6f40 !important;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#logo {
+  max-width: 300px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.branding {
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 70px;
+  width: 70px;
+}
