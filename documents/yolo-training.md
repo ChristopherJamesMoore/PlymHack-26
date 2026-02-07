@@ -48,17 +48,23 @@ names:
   5: trash
 
 ### 4. Train (Python)
+```bash
 python3 -m venv .venv-train
 source .venv-train/bin/activate
 pip install ultralytics
 yolo detect train model=yolov8n.pt data=dataset/data.yaml imgsz=640 epochs=30 batch=16
+```
 
 ### 5. Export to ONNX
+```bash
 yolo export model=runs/detect/train/weights/best.pt format=onnx opset=12 simplify
 mv runs/detect/train/weights/best.onnx backend/model/yolo.onnx
+```
 
 Create labels.json:
+```bash
 ["plastic_bottle","aluminum_can","glass_bottle","cardboard","paper","trash"]
+```
 
 ---
 
@@ -68,6 +74,7 @@ Create labels.json:
 Camera → throttle frames → backend /detect → response
 
 ### Capture Frame
+```bash
 export function captureJpeg(video, canvas, maxWidth = 640) {
   const scale = Math.min(1, maxWidth / video.videoWidth);
   canvas.width = video.videoWidth * scale;
@@ -75,8 +82,10 @@ export function captureJpeg(video, canvas, maxWidth = 640) {
   canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
   return canvas.toDataURL("image/jpeg", 0.7);
 }
+```
 
 ### Send to Backend
+```bash
 async function sendFrame(dataUrl) {
   const blob = await (await fetch(dataUrl)).blob();
   const form = new FormData();
@@ -84,13 +93,16 @@ async function sendFrame(dataUrl) {
   const res = await fetch("http://localhost:3000/detect", { method: "POST", body: form });
   return res.json();
 }
+```
 
 ### Throttled Loop
+```bash
 while (true) {
   const frame = captureJpeg(video, canvas);
   if (frame) setResult(await sendFrame(frame));
   await new Promise(r => setTimeout(r, 333));
 }
+```
 
 ---
 
