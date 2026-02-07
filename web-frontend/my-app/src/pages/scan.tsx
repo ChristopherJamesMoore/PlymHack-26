@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HeaderNav } from "../components/header-nav";
 import { CameraContainer } from "../components/camera-container";
 import { CameraControls } from "../components/camera-controls";
 import { ResultsPanel } from "../components/results-panel";
 
 export function ScanPage() {
+  const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null!);
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
@@ -36,13 +38,13 @@ export function ScanPage() {
   const handlers = useMemo(() => {
     return {
       home: () => {
-        // navigate / reset view if you want
+        navigate('/');
       },
       camera: () => {
-        // scroll into view / focus camera section if you want
+        navigate('/scan');
       },
       Help: () => {
-        //placeholder
+        console.log('Help clicked');
       },
       startCamera: async () => {
         setIsCameraOn(true);
@@ -51,11 +53,15 @@ export function ScanPage() {
         setIsCameraOn(false);
       },
     };
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="container py-3">
-      <HeaderNav onHomeClick={handlers.home} onCameraClick={handlers.camera} />
+      <HeaderNav 
+        onHomeClick={handlers.home} 
+        onCameraClick={handlers.camera}
+        onHelpClick={handlers.Help}
+      />
 
       <img id="logo" src="/images/LogoWriting.png"></img>
       <div className="my-3">
