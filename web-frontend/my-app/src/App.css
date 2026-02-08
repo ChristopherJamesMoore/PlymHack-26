@@ -155,5 +155,13 @@ ul {
   bottom: 20px;
   right: 20px;
   z-index: 1000;
-  border-radius: 25px;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+#location-button img {
+  width: 100px;
+  height: 100px;
+  display: block;
 }

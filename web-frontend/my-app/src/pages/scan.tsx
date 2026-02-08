@@ -4,6 +4,7 @@ import { HeaderNav } from "../components/header-nav";
 import { CameraContainer } from "../components/camera-container";
 import { CameraControls } from "../components/camera-controls";
 import { ResultsPanel } from "../components/results-panel";
+import { RecyclingMap } from "../components/recycling-map";
 
 export function ScanPage() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export function ScanPage() {
   const [resultsText, setResultsText] = useState("No results yet.");
   const [centersText, setCentersText] = useState("No centers found yet.");
   const [locationText, setLocationText] = useState("Location not retrieved yet.");
+  const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
 
   const [isCameraOn, setIsCameraOn] = useState(false);
   const streamRef = useRef<MediaStream | null>(null);
@@ -22,6 +24,15 @@ export function ScanPage() {
     const savedLocation = localStorage.getItem('userLocation');
     if (savedLocation) {
       setLocationText(savedLocation);
+      // Parse the coordinates from the saved location string
+      const latMatch = savedLocation.match(/Latitude: ([-\d.]+)/);
+      const lonMatch = savedLocation.match(/Longitude: ([-\d.]+)/);
+      if (latMatch && lonMatch) {
+        setUserLocation({
+          lat: parseFloat(latMatch[1]),
+          lon: parseFloat(lonMatch[1]),
+        });
+      }
     }
   }, []);
 
@@ -134,11 +145,15 @@ export function ScanPage() {
             const locationString = `Latitude: ${latitude.toFixed(4)}, Longitude: ${longitude.toFixed(4)}`;
             setLocationText(locationString);
             localStorage.setItem('userLocation', locationString);
+            setUserLocation({ lat: latitude, lon: longitude });
           },
           (error) => {
             setLocationText(`Error: ${error.message}`);
           }
         );
+      },
+      onRecyclingCentersFound: (count: number) => {
+        setCentersText(count > 0 ? `Found ${count} recycling center${count !== 1 ? 's' : ''} nearby` : 'No recycling centers found nearby');
       },
     };
   }, [navigate]);
@@ -165,11 +180,18 @@ export function ScanPage() {
       />
       <ResultsPanel resultsText={resultsText} recyclingCentersText={centersText} />
 
-        <button id="location-button"
-          onClick={handlers.getLocation}
-        >
+        <button id="location-button" onClick={handlers.getLocation}>
+          <img src="/images/Turtle.png" className="location-icon" ></img>
           Get My Location
         </button>
+
+        {userLocation && (
+          <RecyclingMap 
+            latitude={userLocation.lat}
+            longitude={userLocation.lon}
+            onRecyclingCentersFound={handlers.onRecyclingCentersFound}
+          />
+        )}
     </div>
   );
 }
