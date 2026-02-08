@@ -1,6 +1,10 @@
 # PlymHack-26
 ## What has the hackathon taught us video
-https://discord.com/channels/@me/1127358542974828605/1469903896154603612
+
+https://youtu.be/_A2QhhpnXEs
+
+***
+
 <img width="2924" height="1598" alt="image" src="https://github.com/user-attachments/assets/b9e7f786-8437-4749-8c53-e498bfa1d71f" />
 
 ## Commit types
