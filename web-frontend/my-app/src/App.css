@@ -152,16 +152,17 @@ ul {
 
 #location-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9999;
+  pointer-events: auto;
   background: transparent;
   border: none;
   padding: 0;
 }
 
 #location-button img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   display: block;
 }

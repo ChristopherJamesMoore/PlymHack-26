@@ -14,6 +14,8 @@ export function ScanPage() {
   const [resultsText, setResultsText] = useState("No results yet.");
   const [centersText, setCentersText] = useState("No centers found yet.");
   const [locationText, setLocationText] = useState("Location not retrieved yet.");
+  const [isMapVisible, setIsMapVisible] = useState(false);
+  const [mapKey, setMapKey] = useState(0);
   const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
 
   const [isCameraOn, setIsCameraOn] = useState(false);
@@ -153,6 +155,7 @@ export function ScanPage() {
             setLocationText(locationString);
             localStorage.setItem('userLocation', locationString);
             setUserLocation({ lat: latitude, lon: longitude });
+            setIsMapVisible(true);
           },
           (error) => {
             setLocationText(`Error: ${error.message}`);
@@ -164,6 +167,15 @@ export function ScanPage() {
       },
     };
   }, [navigate]);
+
+  const handleLocationClick = () => {
+    if (isMapVisible) {
+      setIsMapVisible(false);
+      return;
+    }
+    setMapKey((prev) => prev + 1);
+    handlers.getLocation();
+  };
 
   return (
     <div className="container py-3">
@@ -187,18 +199,21 @@ export function ScanPage() {
       />
       <ResultsPanel resultsText={resultsText} recyclingCentersText={centersText} />
 
-        <button id="location-button" onClick={handlers.getLocation}>
+      <div className="map-wrapper">
+        <button id="location-button" onClick={handleLocationClick}>
           <img src="/images/Turtle.png" className="location-icon" ></img>
           Get My Location
         </button>
 
-        {userLocation && (
+        {isMapVisible && userLocation && (
           <RecyclingMap 
+            key={mapKey}
             latitude={userLocation.lat}
             longitude={userLocation.lon}
             onRecyclingCentersFound={handlers.onRecyclingCentersFound}
           />
         )}
+      </div>
     </div>
   );
 }
