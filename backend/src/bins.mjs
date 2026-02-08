@@ -1,11 +1,10 @@
 export const BIN_MAP = {
-  bottle: "Plastic recycling",
-  cup: "Plastic recycling",
-  wine_glass: "Glass recycling",
-  can: "Metal recycling",
-  book: "Paper recycling",
-  box: "Cardboard",
-  paper: "Paper recycling"
+  plastic: "Plastic recycling",
+  glass: "Glass recycling",
+  metal: "Metal recycling",
+  paper: "Paper recycling",
+  cardboard: "Cardboard recycling",
+  general_waste: "General waste"
 };
 
 export function mapToBin(label) {

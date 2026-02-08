@@ -162,7 +162,47 @@ ul {
 }
 
 #location-button img {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   display: block;
+}
+
+.location-bubble {
+  position: absolute;
+  right: 170px;
+  bottom: 48px;
+  max-width: 220px;
+  padding: 8px 10px;
+  background: #fff7e6;
+  color: #4a2d0f;
+  border: 2px solid #d6b450;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.location-bubble::after {
+  content: "";
+  position: absolute;
+  right: -9px;
+  bottom: 14px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 9px solid #d6b450;
+}
+
+.location-bubble::before {
+  content: "";
+  position: absolute;
+  right: -7px;
+  bottom: 14px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 9px solid #fff7e6;
 }

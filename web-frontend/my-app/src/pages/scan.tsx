@@ -13,6 +13,7 @@ export function ScanPage() {
 
   const [resultsText, setResultsText] = useState("No results yet.");
   const [centersText, setCentersText] = useState("No centers found yet.");
+  const [binText, setBinText] = useState("");
   const [locationText, setLocationText] = useState("Location not retrieved yet.");
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [mapKey, setMapKey] = useState(0);
@@ -90,13 +91,16 @@ export function ScanPage() {
         typeof top.conf === "number" ? Number(top.conf) : null;
       if (confValue !== null && confValue < 0.5) {
         setResultsText("I'm not sure.");
+        setBinText("");
         return;
       }
       const conf =
         confValue !== null ? ` (${(confValue * 100).toFixed(1)}%)` : "";
       setResultsText(`${top.label}${conf}`);
+      setBinText(data?.bin ? `Bin: ${data.bin}` : "");
     } else {
       setResultsText("No results yet.");
+      setBinText("");
     }
   }, []);
 
@@ -197,11 +201,18 @@ export function ScanPage() {
         stopDisabled={!isCameraOn}
         captureDisabled={!isCameraOn}
       />
-      <ResultsPanel resultsText={resultsText} recyclingCentersText={centersText} />
+      <ResultsPanel
+        resultsText={resultsText}
+        binText={binText}
+        recyclingCentersText={centersText}
+      />
 
       <div className="map-wrapper">
         <button id="location-button" onClick={handleLocationClick}>
           <img src="/images/Turtle.png" className="location-icon" ></img>
+          <span className="location-bubble">
+            Click me to see your nearest recycle centers!
+          </span>
           Get My Location
         </button>
 
